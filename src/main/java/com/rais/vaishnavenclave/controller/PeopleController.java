@@ -1,15 +1,32 @@
 package com.rais.vaishnavenclave.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.rais.vaishnavenclave.domain.People;
+import com.rais.vaishnavenclave.service.PeopleService;
 
 @RestController
 public class PeopleController {
 	
-	@GetMapping("/welcome")
-	public String welcome() {
+	@Autowired
+	public PeopleService service;
+	
+	@GetMapping("/getAll")
+	public List<People> welcome() {
 		
-		return "Welcome to vaishnav enclave";
+		return service.getAllPeople();
+	}
+	
+	@PostMapping("/addPeople")
+	public People addPeople(@RequestBody People people) {
+		
+		return service.addPeople(people);
 	}
 
 }
