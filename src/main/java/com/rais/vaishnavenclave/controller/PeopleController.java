@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rais.vaishnavenclave.domain.People;
+import com.rais.vaishnavenclave.request.LoginRequest;
 import com.rais.vaishnavenclave.service.PeopleService;
 
 @RestController
@@ -31,9 +32,10 @@ public class PeopleController {
 	}
 	
 	@PostMapping("/login")
-	public People login(@RequestParam String email, @RequestParam String password) {
+	public People login(@RequestBody LoginRequest request) {
+		System.out.println("============ email = "+request.getEmail()+" password ==== "+request.getPassword());
 		
-		return service.findPeople(email, password).orElseThrow();
+		return service.findPeople(request.getEmail(), request.getPassword()).orElseThrow();
 	}
 	
 	
